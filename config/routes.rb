@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   get '/about',   to: 'pages#about'
   get '/contact', to: 'pages#contact'
 
-  resources :users, only:[:show]
+  resources :users, only:[:show] do
+    member do
+     get :following, :followers
+   end
+  end
   resources :posts, only:[:new,:show,:create,:destroy]
+  resources :relationships,       only: [:create, :destroy]
 end
