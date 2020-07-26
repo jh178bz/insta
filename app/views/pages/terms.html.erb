@@ -1,2 +1,11 @@
-<h1>Pages#terms</h1>
-<p>Find me in app/views/pages/terms.html.erb</p>
+<% provide(:title, 'Terms') %>
+<h1>利用規約</h1>
+    <p>
+      InstaCloneへようこそ！<br>
+      この利用規約は、InstaCloneをご利用いただく際に適用されるものであり、InstaCloneサービスに関する情報を提供するものです。<br>
+      InstaCloneアカウントを作成する場合、またはInstaCloneをご利用になる場合は、本規約に同意していただくことになります。<br>
+      InstaCloneはinstagramのパクリです。ですのでだいたいの規約は<a href="https://www.facebook.com/help/instagram/478745558852511">こちら</a>に依存するので<br>
+      ここに記述するのは面倒ですので見といて下さい。
+    </p>
+
+  <%= link_to "Back", new_user_registration_path %>
