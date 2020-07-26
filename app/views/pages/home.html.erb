@@ -1,22 +1,17 @@
 <% provide(:title, 'Home') %>
 <% if user_signed_in? %>
   <div class="row">
-    <p>検索</p>
-    <%= form_tag(home_path,:method => 'get') do %>
-    <%= text_field_tag :search %>
-    <%= submit_tag 'Search', :name => nil %>
-    <% end %>
     <aside class="col-md-4">
       <section class="user_info">
-        <%#= render 'shared/user_info' %>
+        <%= render 'shared/user_info' %>
       </section>
       <section class="stats">
-      <%#= render 'shared/stats' %>
+      <%= render 'shared/stats' %>
     </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
-      <%#= render 'shared/feed' %>
+      <h3>Post Feed</h3>
+      <%= render 'shared/feed' %>
     </div>
   </div>
 <% else %>

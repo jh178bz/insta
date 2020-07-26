@@ -8,7 +8,7 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:omniauthable,omniauth_providers:[:facebook]
 
@@ -29,6 +29,14 @@ class User < ApplicationRecord
      super
    end
  end
+
+ # ユーザーのステータスフィードを返す
+  def feed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Post.where("user_id IN (#{following_ids})
+                OR user_id = :user_id", user_id: id)
+  end
 
  # ユーザーをフォローする
   def follow(other_user)
