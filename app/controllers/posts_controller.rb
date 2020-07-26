@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
-  
+
   def new
     @post = current_user.posts.build if user_signed_in?
   end
@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "Image Upload!"
-      redirect_to root_url
+      redirect_to @post
     else
       render 'pages/home'
     end
