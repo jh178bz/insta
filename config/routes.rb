@@ -1,3 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
+
+  root 'pages#home'
+
+  get '/home' ,   to: 'pages#home'
+  get '/terms',   to: 'pages#terms'
+  get '/about',   to: 'pages#about'
+  get '/contact', to: 'pages#contact'
+
+  resources :users, only:[:show] do
+    member do
+     get :following, :followers
+   end
+  end
+  resources :posts, only:[:new,:show,:create,:destroy] do
+    resources :comments, only: [:create]
+  end
+  resources :relationships,       only: [:create, :destroy]
 end

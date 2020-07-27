@@ -1,0 +1,29 @@
+<% provide(:title, 'Images Page') %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= link_to gravatar_for(@post.user, size: 50), @post.user %>
+        <span class="user"><%= link_to @post.user.name, @post.user %></span>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <span class="content">
+      <ol class="post">
+        <%= image_tag @post.display_image %>
+      </ol>
+      <% @comments.each do |c| %>
+      <%= c.comment_content %>
+      <% end %>
+    </span>
+    <%= form_with(model:[@post,@comment], local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+      <div class="field">
+        <%= f.text_area :comment_content, placeholder: "Compose new comment..." %>
+      </div>
+    <%= f.hidden_field :post_id, value: @post.id  %>
+    <%= f.submit "コメントする", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
